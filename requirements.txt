@@ -1,0 +1,13 @@
+# Requirements for the project
+# Created by M. Massenzio, 2024-02-29
+
+accelerate
+ipython
+jupyter
+numpy
+opencv-python
+pandas
+Pillow
+requests
+torch
+transformers
