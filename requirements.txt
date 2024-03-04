@@ -2,6 +2,9 @@
 # Created by M. Massenzio, 2024-02-29
 
 accelerate
+# Fork of the decord library to support Apple Silicon (ARM) architecture
+eva-decord
+gradio
 ipython
 jupyter
 numpy
