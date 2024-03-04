@@ -5,8 +5,10 @@ accelerate
 # Fork of the decord library to support Apple Silicon (ARM) architecture
 eva-decord
 gradio
+huggingface_hub
 ipython
 jupyter
+langchain
 numpy
 opencv-python
 pandas

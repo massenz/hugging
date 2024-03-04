@@ -1,3 +1,6 @@
+# Created by M. Massenzio, 2024
+
+import configparser
 from PIL import Image, ImageDraw, ImageOps
 import random
 import requests
@@ -68,3 +71,19 @@ def apply_mask(image, mask):
     mask_image = ImageOps.invert(mask)
     base_image.paste(mask_image, mask=mask_image)
     return base_image
+
+
+def read_env(location="private/env"):
+    """Reads the environment properties from the specified file"""
+    env = {}
+    with open(location, 'r') as f:
+        # Initialize ConfigParser and read the file
+        config = configparser.ConfigParser(allow_no_value=True)
+        config.read_file(f)
+        for section in config.sections():
+            # Iterate over each option in the section
+            for option in config.options(section):
+                # Add the option and its value to the dictionary
+                env[option] = config.get(section, option)
+
+    return env
