@@ -1,21 +1,6 @@
-
-from PIL import Image
-import requests
 from transformers import pipeline, ViTFeatureExtractor, ViTForImageClassification
 
-
-def load_image(url):
-    """Loads an image from a URL or local disk"""
-    # if the image is from the Web
-    if url.startswith('http'):
-        image = Image.open(requests.get(url, stream=True).raw)
-    elif url.startswith('file'):
-        # the image is local
-        image = Image.open(url[7:])
-    else:
-        raise ValueError("Unsupported image source URL")
-    return image
-
+from common import load_image
 
 # Load an image from disk
 im = load_image('file://marco.jpeg')
