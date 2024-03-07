@@ -9,10 +9,13 @@ huggingface_hub
 ipython
 jupyter
 langchain
+langchain-openai
+llama_index
 numpy
 opencv-python
 pandas
 Pillow
+pypdf
 requests
 torch
 transformers

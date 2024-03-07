@@ -5,6 +5,9 @@ from PIL import Image, ImageDraw, ImageOps
 import random
 import requests
 
+from langchain.memory import ConversationBufferMemory
+from langchain_core.messages import AIMessage
+
 
 def load_image(url):
     """Loads an image from a URL or local disk"""
@@ -87,3 +90,11 @@ def read_env(location="private/env"):
                 env[option] = config.get(section, option)
 
     return env
+
+
+def print_memory(memory: ConversationBufferMemory):
+    """Prints the memory of a conversation"""
+    messages = memory.chat_memory.messages
+    for message in messages:
+        actor = 'AI' if isinstance(message, AIMessage) else 'Human'
+        print(f"{actor}: {message.content}\n")
