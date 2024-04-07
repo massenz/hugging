@@ -1,6 +1,6 @@
 # Created by M. Massenzio, 2024
 
-from common import read_env, print_memory
+from common import read_env
 import os
 import gradio as gr
 from llama_index.core import (
@@ -21,7 +21,7 @@ MODEL = env.get('oai_model')
 if not MODEL:
     raise ValueError("OpenAI model not found in environment")
 
-INDEXES = os.sep.join([os.getenv("HOME"), env.get("indexes_dir", "indexes")])
+INDEXES = os.sep.join([os.getenv("HOME"), ".cache", env.get("indexes_dir", "indexes")])
 
 
 def index_documents(folder):
@@ -77,17 +77,17 @@ class Chatbot:
 def show_ui():
     chatbot = Chatbot(INDEXES)
     gr.Interface(
-        fn=chatbot, title="Ask me about LLMs",
+        fn=chatbot, title="Ask me about Banking & Finance",
         inputs="text", outputs="text").launch()
 
 
 if __name__ == '__main__':
-    folder = input("Folder with training docs (leave empty to skip): ")
-    if not folder:
+    docs = input("Folder with training docs (leave empty to skip): ")
+    if not docs:
         print("Skipping indexing")
     else:
         try:
-            if os.stat(folder).st_size == 0:
+            if os.stat(docs).st_size == 0:
                 print("Folder is empty")
                 exit()
         except FileNotFoundError:
@@ -95,7 +95,7 @@ if __name__ == '__main__':
             exit()
         try:
             print("Indexing documents...")
-            index_documents(folder)
+            index_documents(docs)
             print("Indexing complete")
         except Exception as e:
             print(f"Indexing failed: {e}")

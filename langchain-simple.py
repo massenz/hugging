@@ -24,7 +24,7 @@ prompt = PromptTemplate(
 )
 
 hub_llm = HuggingFaceEndpoint(
-    repo_id=env['model'],
+    repo_id=env['hf_model'],
     temperature=1,
     model_kwargs={"max_length": 64}
 )
@@ -37,14 +37,15 @@ llm_chain = ConversationChain(
 
 question = ''
 while True:
-    # Prompt the user for a question
-    question = input("Ask a question: ")
-    if question == 'done':
+    try:
+        # Prompt the user for a question
+        question = input("Ask a question ([Ctrl-D] to quit): ")
+        # Generate the answer
+        # answer = llm_chain.invoke({'question': question})
+        # print(f"Answer: {answer['text']}")
+        print(llm_chain.invoke({'input': question})['response'])
+    except EOFError:
         break
-    # Generate the answer
-    # answer = llm_chain.invoke({'question': question})
-    # print(f"Answer: {answer['text']}")
-    print(llm_chain.invoke({'input': question})['response'])
 
 print("This is a record of the conversation:")
 print_memory(memory)
