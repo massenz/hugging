@@ -76,7 +76,7 @@ def apply_mask(image, mask):
     return base_image
 
 
-def read_env(location="private/env"):
+def read_env(location: str = "private/env") -> dict[str, str]:
     """Reads the environment properties from the specified file"""
     env = {}
     with open(location, 'r') as f:
@@ -88,11 +88,10 @@ def read_env(location="private/env"):
             for option in config.options(section):
                 # Add the option and its value to the dictionary
                 env[option] = config.get(section, option)
-
     return env
 
 
-def print_memory(memory: ConversationBufferMemory):
+def print_memory(memory: ConversationBufferMemory) -> None:
     """Prints the memory of a conversation"""
     messages = memory.chat_memory.messages
     for message in messages:
