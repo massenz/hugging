@@ -12,6 +12,7 @@ langchain
 langchain-openai
 llama_index
 numpy
+openai
 opencv-python
 pandas
 Pillow
